@@ -139,4 +139,9 @@ cython_debug/
 
 # OS generated files
 .DS_Store
+<<<<<<< HEAD
 
+=======
+.DS_Store?
+._*
+>>>>>>> cb9e4821f17519beec934093a5fed28241ec64c3
