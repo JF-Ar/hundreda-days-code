@@ -2,6 +2,7 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from bs4 import BeautifulSoup
 from webdriver_manager import driver
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -17,6 +18,8 @@ class LinkedinBot():
 
     
     def __init__(self, username, password, profissao):
+        opts = Options()
+        opts.add_argument('--headless')
         self.username = username
         self.password = password
         self.profissao = profissao
@@ -35,34 +38,38 @@ class LinkedinBot():
         sleep(1)
         camposenha.send_keys(self.password)
         botao_entrar = driver.find_element_by_class_name('sign-in-form__submit-button').click()
-
+        sleep(4)
 
     def find_busca(self):
         driver = self.driver
+        sleep(4)
         campo_pesquisar = driver.find_element_by_xpath('//input[@placeholder="Pesquisar"]')
         campo_pesquisar.clear()
         sleep(2)
         campo_pesquisar.send_keys(self.profissao + Keys.ENTER)
-        sleep(2)
+        sleep(4)
 ##Caso queira mais filtros, basta trocar na função futuramente
 #numero de conexões por exemplo
     def filtros(self):
         driver = self.driver
         filtropessoas = driver.find_element_by_xpath('//button[@aria-label="Pessoas"]')
         filtropessoas.click()
-        sleep(2)
+        sleep(3)
+
 
     def enviar_solicitacao(self):
         driver = self.driver
-        conectar_buttons = driver.find_elements_by_class_name('entity-result__actions entity-result__divider')
-    
+        #encontrando a tag mãe
+        #pessoas = driver.find_elements_by_xpath('//*[@id="main"]/div/div/div[2]/ul/li')
+        buttons = driver.find_elements_by_xpath('//*[@id="main"]/div/div/div[2]/ul/li/div/div/div[3]/div/button')
+        #print(len(pessoas))  
+        print(len(buttons)) #testando o numero de botões encontrados
 
-        
-
-bot = LinkedinBot('ablue@balue','senha ablue', 'criador de bots kkks')
+bot = LinkedinBot('bla bla bla@seuemail.com','1234secreto', 'criador de bots')
 bot.login()
 bot.find_busca()
-bot.filtros
+bot.filtros()
+bot.enviar_solicitacao()
 
 
         
