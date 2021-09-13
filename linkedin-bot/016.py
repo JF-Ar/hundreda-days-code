@@ -1,25 +1,17 @@
 from time import sleep
+import random
+
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
-from bs4 import BeautifulSoup
 from webdriver_manager import driver
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-class LinkedinBot():
 
-    def texto(self):
-        self.mensagem = ( """Opa! Meu nome é Josué Junio e estou começando
-        na nossa área e acho que esse conecção pode ser útil para ambos!
-        Eu me apaixonei pela programação e gostaria de fazer mais contatos.
-        De qualquer maneira, eu gostei do seu perfil e gostaria de manter contato.
-        Um abraço! """)
+class LinkedinBot():
 
     
     def __init__(self, username, password, profissao):
-        opts = Options()
-        opts.add_argument('--headless')
         self.username = username
         self.password = password
         self.profissao = profissao
@@ -48,28 +40,56 @@ class LinkedinBot():
         sleep(2)
         campo_pesquisar.send_keys(self.profissao + Keys.ENTER)
         sleep(4)
-##Caso queira mais filtros, basta trocar na função futuramente
+
+##Caso queira mais filtros, basta colocar na função futuramente
 #numero de conexões por exemplo
     def filtros(self):
         driver = self.driver
+        sleep(2)
         filtropessoas = driver.find_element_by_xpath('//button[@aria-label="Pessoas"]')
         filtropessoas.click()
         sleep(3)
+    
+    @staticmethod
+    def digitando_como_pessoa(texto, campo_mensagem):
+        for letra in texto:
+            campo_mensagem.send_keys(letra)
+            sleep(random.randint(1,5)/30)
+
 
 
     def enviar_solicitacao(self):
         driver = self.driver
-        #encontrando a tag mãe
-        #pessoas = driver.find_elements_by_xpath('//*[@id="main"]/div/div/div[2]/ul/li')
-        buttons = driver.find_elements_by_xpath('//*[@id="main"]/div/div/div[2]/ul/li/div/div/div[3]/div/button')
-        #print(len(pessoas))  
-        print(len(buttons)) #testando o numero de botões encontrados
+        #definindo a mensagem
+        mensagem = ( """Opa! Meu nome é PIPIPOPO SEU NOME e estou começando na nossa área e acho que esse conexão pode ser útil para ambos!
+Eu me apaixonei pela programação e gostaria de fazer mais contatos.
+De qualquer maneira, eu gostei do seu perfil e gostaria de manter contato.
+    Um abraço! """)
+        for i in range(0, 3):
+                driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+                sleep(2)
+                tds_pags_buttons = driver.find_elements_by_tag_name('button')
+                botao_conectar = [btn for btn in tds_pags_buttons if btn.text == "Conectar"]
+                
+                for btn in botao_conectar:
+                    driver.execute_script("arguments[0].click();", btn)
+                    sleep(2)
+                    adcionar_nota = driver.find_element_by_xpath('//button[@aria-label="Adicionar nota"]')
+                    driver.execute_script("arguments[0].click();", adcionar_nota)
+                    sleep(2)
+                    nota = driver.find_element_by_xpath('//*[@id="custom-message"]')
+                    bot.digitando_como_pessoa(mensagem, nota)
+                    sleep(1)
+                    enviar = driver.find_element_by_xpath('//button[@aria-label="Enviar agora"]')
+                    driver.execute_script("arguments[0].click();", enviar)
+                    sleep(2)
+        prox_pag = driver.find_element_by_xpath('//button[@aria-label="Avançar"]').click()
+        sleep(3)
+        print('proxima pagina')
 
-bot = LinkedinBot('bla bla bla@seuemail.com','1234secreto', 'criador de bots')
+
+bot = LinkedinBot('sue.@email.com','123senhasecreta', 'profissão dos seus sonhos')
 bot.login()
 bot.find_busca()
 bot.filtros()
 bot.enviar_solicitacao()
-
-
-        
