@@ -1,6 +1,6 @@
 App de to-do-list, ou se preferir lista de afazeres. (Estou treinando meu inglês, então o codigo tem um pouco disso.)
 btw... 
-Usando o tkinter, com o app você vai adcionar tarefas, riscar as que já estão feitas(e desfazer o 'check', caso faça por engano), deletar tarefas.
+Usando o tkinter, com o app você vai adcionar tarefas, riscar as que já estão feitas(e desfazer o 'check', caso faça por engano), deletar tarefas (qualquer tarefa) ou ainda, deletar apenas as marcadas no 'check'.
 O app conta com um scroll-bar, caso seja uma lista muito grande, você vai poder vê-la completa utilizando a scroll-bar. 
 
 #That's all
