@@ -117,6 +117,5 @@ class LinkedinBot():
                     print('proxima pagina')
                 except Exception as e:
                     print(e)
-    enviar_solicitacao()
 
 ##Popup de aviso semanal aria-label="Entendi"
