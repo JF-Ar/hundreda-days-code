@@ -62,9 +62,20 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'animelist.pipelines.AnimelistPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'animelist.pipelines.AnimelistPipeline': 300,
+}
+DATABASE = {
+    "postgres":{
+                "user": '',
+                "password": '',
+                "host": '',
+                "database": ''
+    }
+}
+
+LOG_LEVEL = 'INFO'
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

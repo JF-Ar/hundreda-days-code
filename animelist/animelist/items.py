@@ -8,5 +8,10 @@ import scrapy
 
 class AnimelistItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    Titulo = scrapy.Field()
+    Nota = scrapy.Field()
+    Eps = scrapy.Field()
+    Ano = scrapy.Field()
+    Membros = scrapy.Field()
+    Assista = scrapy.Field()
+    Image = scrapy.Field()
